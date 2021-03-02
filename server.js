@@ -1,11 +1,10 @@
-// const express = require('express');
- const inquirer = require('inquirer');
-// // install console table
+const express = require('express');
+const mysql = require('mysql');
+const config = require('../config/local')
+const router = express.Router()
+const cTable = require('console.table');
 
-// app = express();
-// event handler 
 
-// app.listen()
 
 // Add departments, roles, employees View departments, roles, employees Update employee roles
 inquirer.prompt([
@@ -63,7 +62,9 @@ function departmentPrompt(){
             name:'depName',
             message:'Department name'
         }
-    ]).then((data)=>{}); 
+    ]).then((data)=>{
+        //this info will connect to a connection query to update the db
+    }); 
 };
 
 //Role
