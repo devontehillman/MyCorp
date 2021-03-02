@@ -17,19 +17,27 @@ inquirer.prompt([
     
     switch(data.userChoice){
         case 'View departments':
-        
+            connection.connect((err) => {
+                if (err) throw err;
+                console.log(`connected as id ${connection.threadId}`);
+                readTable(`department`)
+            });
         break;
 
         case'View roles':
-        
+            connection.connect((err) => {
+                if (err) throw err;
+                console.log(`connected as id ${connection.threadId}`);
+                readTable(`roles`)
+            });
         break;
 
         case'View employees':
-        connection.connect((err) => {
-            if (err) throw err;
-            console.log(`connected as id ${connection.threadId}`);
-            readTable()
-        });
+            connection.connect((err) => {
+                if (err) throw err;
+                console.log(`connected as id ${connection.threadId}`);
+                readTable(`employees`)
+            });
         break;
 
         case'Add departments':
@@ -89,7 +97,10 @@ function rolePrompt(){
             name:'depID',
             message:'Department ID'
         }
-    ]).then((data)=>{}); 
+    ]).then((data)=>{
+        createEmployee(`roles`,{title: data.jobTitle, salary: data.salary, department_id: data.depID});
+        //readTable(`roles`)
+    }); 
 };
 
 //Employee
@@ -106,16 +117,16 @@ function employeePrompt(){
             message:'Last name'
         }
     ]).then((data)=>{
-        createEmployee(data.firstName, data.lastName);
-        readTable()
+        createEmployee(`employees`, {firstname: data.firstName, lastname: data.lastName});
+        //readTable(`employees`)
     }); 
 }  
 
 // view any thing 
 // access table from db and display 
-const readTable = () => {
-    console.log('Selecting all employees...\n');
-    connection.query('SELECT * FROM employees', (err, res) => {
+const readTable = (tableName) => {
+    console.log(`Viewing the ${tableName} table...\n`);
+    connection.query(`SELECT * FROM ` + tableName, (err, res) => {
       if (err) throw err;
       // Log all results of the SELECT statement
       console.table(res);
@@ -126,19 +137,15 @@ const readTable = () => {
 // access database and insert into it
 
 //update employees is this a modifier?
-const createEmployee = (first, last) => {
+const createEmployee = (selection,queryObj) => {
     console.log('Inserting a new employee...\n');
     const query = connection.query(
-      'INSERT INTO employees SET ?',
-      {
-        firstname: first,
-        lastname: last,
-      },
+      'INSERT INTO '+ selection +' SET ?',queryObj,
       (err, res) => {
         if (err) throw err;
         console.table(`${res.affectedRows} product inserted!\n`);
         // Call updateProduct AFTER the INSERT completes
-        readTable();
+        readTable(selection);
       }
     );
 }
