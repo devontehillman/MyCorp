@@ -39,6 +39,33 @@ const readProducts = () => {
       }
     );
 }
+const updateProduct = () => {
+    console.log('Updating Employee Name...\n');
+    const query = connection.query(
+      'UPDATE employees SET ? WHERE ?',
+      [
+        {
+          firstname: 'Jhonny',
+          lastname: 'Appleseed'
+        },
+        {
+          id: '4',
+        },
+      ],
+      (err, res) => {
+        if (err) throw err;
+        console.log(`${res.affectedRows} products updated!\n`);
+        // Call deleteProduct AFTER the UPDATE completes
+        console.table(res);
+        connection.end();
+      }
+    );
+  
+    // logs the actual query being run
+    console.log(query.sql);
+  };
+
+
 
 const deleteEmployee = () => {
     console.log('Deleting employee...\n');
@@ -63,7 +90,7 @@ const connection = mysql.createConnection(config.db);
 connection.connect((err) => {
   if (err) throw err;
   console.log(`connected as id ${connection.threadId}`);
-  deleteProduct()
+  updateProduct()
 });
 
 

@@ -59,11 +59,28 @@ inquirer.prompt([
         break;
 
         case'Update employees role':
-        
+        updateTablePromts()
         break;
     }
 })
-
+//update table 
+function updateTablePromts(){
+    inquirer.prompt([
+        {
+            type: 'input',
+            name:'employeeID',
+            message:'Employee\'s ID that you want to update:'
+        },
+        {
+            type: 'input',
+            name:'newRoleId',
+            message:'Employee\'s New Role ID:'
+        }
+    ]).then((data)=>{
+        updateTable(data.employeeID,data.newRoleId)
+        //this info will connect to a connection query to update the db
+    }); 
+};
 
 
 //Department
@@ -135,10 +152,7 @@ const readTable = (tableName) => {
     });
   };
 // add departments,role, employees
-// access database and insert into it
-
-//update employees is this a modifier?
-const createEmployee = (selection,queryObj) => {
+const createTableEl = (selection,queryObj) => {
     console.log('Inserting a new employee...\n');
     const query = connection.query(
       'INSERT INTO '+ selection +' SET ?',queryObj,
@@ -150,6 +164,20 @@ const createEmployee = (selection,queryObj) => {
       }
     );
 }
+
+//update employees is this a modifier?
+const updateTable = (employee_id, newRoleId) => {
+    console.log('Updating employee id...\n');
+    const query = connection.query(
+      'UPDATE employees SET ? WHERE ?',[{role_id:newRoleId},{id:employee_id},], (err, res) => {
+        if (err) throw err;
+        console.log(`${res.affectedRows} products updated!\n`);
+        // Call deleteProduct AFTER the UPDATE completes
+        connection.end();
+      }
+    );
+    //add console log "employee with id updated role to..."
+  };
 
 // delete a Employee
 //add an employee
