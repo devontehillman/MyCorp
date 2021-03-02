@@ -75,6 +75,7 @@ function departmentPrompt(){
             message:'Department name'
         }
     ]).then((data)=>{
+        createEmployee(`department`,{name: data.depName});
         //this info will connect to a connection query to update the db
     }); 
 };
