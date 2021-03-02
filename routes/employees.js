@@ -24,7 +24,7 @@ const readProducts = () => {
   };
 
   const createProduct = () => {
-    console.log('Inserting a new product...\n');
+    console.log('Inserting a new employee...\n');
     const query = connection.query(
       'INSERT INTO employees SET ?',
       {
@@ -40,8 +40,8 @@ const readProducts = () => {
     );
 }
 
-const deleteProduct = () => {
-    console.log('Deleting all strawberry icecream...\n');
+const deleteEmployee = () => {
+    console.log('Deleting employee...\n');
     connection.query(
       'DELETE FROM employees WHERE ?',
       {
@@ -55,7 +55,7 @@ const deleteProduct = () => {
       }
     );
   };
-  
+
 // create mysql connection
 const connection = mysql.createConnection(config.db);
 
