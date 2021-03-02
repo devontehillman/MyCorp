@@ -36,7 +36,7 @@ inquirer.prompt([
             connection.connect((err) => {
                 if (err) throw err;
                 console.log(`connected as id ${connection.threadId}`);
-                readTable(`employees`)
+                readTableEmployee()
             });
         break;
 
@@ -142,6 +142,16 @@ function employeePrompt(){
 
 // view any thing 
 // access table from db and display 
+const readTableEmployee = (tableName) => {
+    
+    connection.query(employeeQuery, (err, res) => {
+      if (err) throw err;
+      // Log all results of the SELECT statement
+      console.table(res);
+      connection.end();
+    });
+  }
+// access table from db and display 
 const readTable = (tableName) => {
     console.log(`Viewing the ${tableName} table...\n`);
     connection.query(`SELECT * FROM ` + tableName, (err, res) => {
@@ -186,3 +196,8 @@ const updateTable = (employee_id, newRoleId) => {
 const connection = mysql.createConnection(config.db);
 
 // create routes
+const employeeQuery= 
+`SELECT  employees.firstname, employees.lastname, roles.title, department.name dePartment, roles.salary
+FROM employees
+INNER JOIN department ON employees.role_id=department.id
+INNER JOIN roles ON employees.role_id = roles.department_id`

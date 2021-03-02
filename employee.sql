@@ -29,10 +29,10 @@ INSERT INTO employees (firstname, lastname, role_id)
 VALUES ('Devonte','Hillman',3);
 
 INSERT INTO employees (firstname, lastname, role_id, manager_id)
-VALUES ('Ana','Estrella', 2, 1);#id is 2 
+VALUES ('Ana','Estrella', 2, 1);
 
 INSERT INTO employees (firstname, lastname, role_id, manager_id)
-VALUES ('Robert','Webb', 2, 1);#id is 3
+VALUES ('Robert','Webb', 2, 1);
 
 INSERT INTO employees (firstname, lastname, role_id, manager_id)
 VALUES ('Jhon','Doe', 1, 2);
@@ -59,7 +59,7 @@ INSERT INTO roles (title, salary, department_id)
 values('ceo','1000000','3');
 
 INSERT INTO roles (title, salary, department_id)
-values('Manager','30000','3');
+values('Manager','30000','2');
 
 INSERT INTO roles (title, salary, department_id)
-values('Team-Staff','10000','3');
+values('Team-Staff','10000','1');
