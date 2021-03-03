@@ -9,6 +9,7 @@ This is a command line application that is designed for a Management company.Thi
 3. [Usage](#Usage)
 4. [licence](#License)
 5. [Technologies](#Technologies)
+6. [Included Features](#Included-Features)
 6. [Future Improvements](#Future-Improvements)
 
 ## Finished-Page
@@ -33,7 +34,7 @@ To see information on the no license click the badge at the top of this README.
 * SQL
     * MySQL Workbench
 
-# Included features
+# Included-Features
   * View departments, roles, employees
   
   * Add departments, roles, employees
