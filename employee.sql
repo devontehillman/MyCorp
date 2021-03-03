@@ -1,6 +1,6 @@
 CREATE DATABASE IF NOT EXISTS employeesdb;
 
-USE employeesdb 
+USE employeesdb; 
 
 CREATE TABLE IF NOT EXISTS department(
 id INT AUTO_INCREMENT NOT NULL,
