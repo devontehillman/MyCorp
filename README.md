@@ -12,8 +12,8 @@ This is a command line application that is designed for a Management company.Thi
 6. [Future Improvements](#Future-Improvements)
 
 ## Finished-Page
-![My web page](./Assets/homepage.png)
-![My web page](./Assets/noteswp.png)
+![My web page](Assets/images/userInterface.png)
+
 
 
 # Installation
